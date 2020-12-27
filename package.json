@@ -2,10 +2,22 @@
   "name": "ecommerce",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node backend/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thuong-resper/e_commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thuong-resper/e_commerce/issues"
+  },
+  "homepage": "https://github.com/thuong-resper/e_commerce#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

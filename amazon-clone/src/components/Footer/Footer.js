@@ -1,40 +1,37 @@
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
-import "./Header.css";
-import SearchIcon from "@material-ui/icons/Search";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { useStyles } from "./styles";
 
-const Header = (props) => {
+function Copyright() {
   return (
-    <div className="header">
-      <img
-        className="header__logo"
-        src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
-        alt=""
-      />
-      <div className="header__search">
-        <input className="header__searchInput" type="text" />
-        <SearchIcon className="header__searchIcon" />
-      </div>
-      <div className="header__nav">
-        <div className="header__option">
-          <span className="header__actionLineOne">Hello Guest</span>
-          <span className="header__actionLineTwo">Sign in</span>
-        </div>
-        <div className="header__option">
-          <span className="header__actionLineOne">Return</span>
-          <span className="header__actionLineTwo">& Orders</span>
-        </div>
-        <div className="header__option">
-          <span className="header__actionLineOne">Your</span>
-          <span className="header__actionLineTwo">Prime</span>
-        </div>
-      </div>
-      <div className="header__optionBasket">
-        <ShoppingBasketIcon />
-        <span className="header__actionLineTwo header_basketCount">0</span>
-      </div>
+    <Typography variant="body2" color="textSecondary">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+export default function StickyFooter() {
+  const classes = useStyles();
+
+  return (
+    <div>
+      <CssBaseline />
+      <footer className={classes.footer}>
+        <Container maxWidth="sm">
+          <Typography variant="body1">
+            My sticky footer can be found here.
+          </Typography>
+          <Copyright />
+        </Container>
+      </footer>
     </div>
   );
-};
-
-export default Header;
+}
