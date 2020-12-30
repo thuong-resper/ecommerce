@@ -1,28 +1,36 @@
 import { Grid } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CustomizedBreadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ProductColor from "../../components/Products/ProductColor/ProductColor";
 import ProductPromotion from "../../components/Products/ProductPromotions/ProductPromotion";
 import ProductRating from "../../components/Rating/Rating";
-import products from "../../products";
 import { useStyles } from "./styles";
-import Button from "@material-ui/core/Button";
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
+// function handleClick(event) {
+//   event.preventDefault();
+//   console.info("You clicked a breadcrumb.");
+// }
 
 const ProductPage = ({ match }) => {
   const classes = useStyles();
-  const product = products.find((p) => p._id === match.params.id);
-  console.log(product);
+  const [product, setProduct] = useState({});
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [match]);
+
+  console.log(product.rating);
   return (
     <Grid container spacing={1} direction="row">
       <Grid item xs={12}>
@@ -106,27 +114,23 @@ const ProductPage = ({ match }) => {
             {/*product quantity*/}
 
             {/*product add to card*/}
-            <div className={classes.button}>
-              <Grid item xs={5}>
-                <Button
-                  variant="contained"
-                  className={classes.orderButton}
-                  disabled={product.countInStock === 0}
-                >
-                  Buy Now
-                </Button>
-              </Grid>
-              <Grid item xs={5}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.orderButton}
-                  disabled={product.countInStock === 0}
-                >
-                  Add To Card
-                </Button>
-              </Grid>
-            </div>
+            <Grid item xs={12} className={classes.button}>
+              <Button
+                variant="contained"
+                className={classes.orderButton}
+                disabled={product.countInStock === 0}
+              >
+                Buy Now
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.orderButton}
+                disabled={product.countInStock === 0}
+              >
+                Add To Card
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

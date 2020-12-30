@@ -39,9 +39,10 @@ export const useStyles = makeStyles((theme) => ({
   button: {
     display: "flex",
     justifyContent: "space-evenly",
+    width: "100%",
   },
   orderButton: {
-    width: "100%",
+    minWidth: "10rem",
     margin: theme.spacing(2),
   },
 }));
