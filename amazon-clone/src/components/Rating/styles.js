@@ -4,6 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   space: {
-    marginLeft: 5
-  }
+    marginLeft: 5,
+  },
 }));

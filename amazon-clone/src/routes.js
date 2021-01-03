@@ -14,6 +14,12 @@ export const routes = [
     exact: false,
   },
   {
+    path: "/cart/:id?",
+    name: "CartPage",
+    component: React.lazy(() => import("./pages/CartPage/CartPage")),
+    exact: false,
+  },
+  {
     path: "/auth",
     name: "AuthPage",
     component: React.lazy(() => import("./pages/AuthPage/AuthPage")),

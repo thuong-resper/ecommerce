@@ -1,10 +1,10 @@
-import qs from "query-string";
-import axiosService from "../commons/axiosService";
-import { API_ENDPOINT } from "../constants";
+// import qs from "query-string";
+// import axiosService from "../commons/axiosService";
+// import { API_ENDPOINT } from "../constants";
 
-// const url = "tasks";
+// const url = "products";
 
-// export const getList = (params = {}) => {
+// export const fetchListProducts = (params = {}) => {
 //   let queryParams = "";
 //   if (Object.keys(params).length > 0) {
 //     queryParams = `?${qs.stringify(params)}`;

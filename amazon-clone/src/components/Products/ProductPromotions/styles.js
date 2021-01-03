@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "baseline",
     borderTop: "1px solid #9e9e9e14",
+    padding: "1.5rem 0",
   },
   promotionTagItem: {
     margin: theme.spacing(1),

@@ -8,8 +8,14 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  media: {
+    width: "100%", // 16:9
+    height: "100%", // 16:9
+    maxHeight: "20rem",
+  },
   rating: {
     display: "flex",
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
   },
@@ -30,6 +36,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#9e9e9e",
     whiteSpace: "nowrap",
     fontSize: 14,
+    marginRight: theme.spacing(0.5),
   },
   priceDetail: {
     padding: "20px 0",
@@ -44,5 +51,14 @@ export const useStyles = makeStyles((theme) => ({
   orderButton: {
     minWidth: "10rem",
     margin: theme.spacing(2),
+  },
+  table: {
+    display: "flex",
+    alignItems: "center",
+    borderTop: "1px solid #9e9e9e14",
+    padding: "1.5rem 0",
+  },
+  input: {
+    webkitAppearance: "none",
   },
 }));

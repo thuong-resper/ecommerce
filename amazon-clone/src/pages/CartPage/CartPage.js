@@ -7,7 +7,7 @@ import SimpleAlerts from "../../components/UI/Alerts/Alerts";
 import { listProducts } from "../../store/actions/productActions";
 import { useStyles } from "./styles";
 
-const HomePage = (props) => {
+const CartPage = (props) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -27,17 +27,9 @@ const HomePage = (props) => {
       alignItems="center"
       justify="center"
     >
-      {loading ? (
-        <SimpleBackdrop click={true} />
-      ) : error ? (
-        <SimpleAlerts severity="error" message={error} />
-      ) : (
-        products.map((product) => (
-          <Product product={product} key={product._id} />
-        ))
-      )}
+      Cart
     </Grid>
   );
 };
 
-export default HomePage;
+export default CartPage;
