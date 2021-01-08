@@ -3,9 +3,10 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
+import { cartReducer } from "./reducers/cartReducers";
 import {
-  productListReducer,
   productDetailsReducer,
+  productListReducer
 } from "./reducers/productReducers";
 
 // const composeEnhancers =
@@ -18,9 +19,18 @@ const rootReducer = combineReducers({
   // auth: authReducer,
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  cart: cartReducer,
 });
 
-const initialState = {};
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
+
+const initialState = {
+  cart: {
+    cartItems: cartItemsFromStorage,
+  },
+};
 
 const sagaMiddleware = createSagaMiddleware();
 

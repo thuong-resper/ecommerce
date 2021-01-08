@@ -1,26 +1,40 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // position: "absolute",
-    // top: "50%",
-    // left: "50%",
-    // transform: "translate(-50%, -50%)",
-    width: "80%",
+    width: "100%",
     "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
+  link: {
+    textDecoration: "none",
+    fontWeight: 500,
+    color: "#111",
+  },
 }));
 
-export default function SimpleAlerts({ severity, message }) {
+export default function SimpleAlerts({
+  severity,
+  message,
+  title,
+  to,
+  titleLink,
+}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Alert severity={severity}>{message}</Alert>
+      <Alert severity={severity}>
+        <AlertTitle>{title}</AlertTitle>
+        {message} —{" "}
+        <Link to={to} className={classes.link}>
+          {titleLink}
+        </Link>
+      </Alert>
     </div>
   );
 }

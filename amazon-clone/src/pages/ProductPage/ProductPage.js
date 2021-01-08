@@ -131,9 +131,8 @@ const ProductPage = ({ history, match }) => {
                       <span>
                         {(
                           -(
-                            1 -
-                            (product.price - product.priceCompare) /
-                              product.price
+                            (product.priceCompare - product.price) /
+                            product.price
                           ) * 100
                         ).toFixed() + "%"}
                       </span>
@@ -182,7 +181,7 @@ const ProductPage = ({ history, match }) => {
 
                 {/*product quantity*/}
 
-                {/*product add to card*/}
+                {/*product add to cart*/}
                 <Grid item xs={12} className={classes.button}>
                   <Button
                     variant="contained"
