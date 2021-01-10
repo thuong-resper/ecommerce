@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
 import AlertDialogSlide from "../UI/Modal/CustomModal";
 import { useStyles } from "./styles";
-import { styles } from "./styles.module.css";
+// import { styles } from "./styles.module.css";
 
 const CartList = (props) => {
   const classes = useStyles();
@@ -42,7 +42,7 @@ const CartList = (props) => {
     >
       <TableCell padding="checkbox">
         <Checkbox
-          onClick={(event) => handleClick(event, row.name)}
+          onClick={(event) => handleClick(event, row.name, row)}
           checked={isItemSelected}
           inputProps={{ "aria-labelledby": labelId }}
         />

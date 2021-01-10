@@ -1,0 +1,11 @@
+:root {
+  --primary: #fed700;
+  --secondary: #3f51b5;
+  --error: #e64a19;
+  --textColor: #fff;
+  --defaultTextColor: #000000;
+  --hover: rgba(0, 0, 0, 0.08);
+  --link: rgba(0, 0, 0, 0.87);
+  --whiteThin: #757575;
+  --secondary: #f50057;
+}

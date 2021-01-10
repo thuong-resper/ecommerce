@@ -6,7 +6,6 @@ import { useStyles } from "./styles";
 const ProductPromotion = ({ product }) => {
   const classes = useStyles();
   const { promotions } = product;
-  console.log(promotions);
   return (
     <Grid item xs={12} className={classes.table}>
       <Grid item xs={3}>

@@ -9,7 +9,6 @@ import { useStyles } from "./styles";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-  console.log(props);
 
   return (
     <div
@@ -28,12 +27,12 @@ function TabPanel(props) {
   );
 }
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `simple-tab-${index}`,
+//     "aria-controls": `simple-tabpanel-${index}`,
+//   };
+// }
 
 const ProductColor = ({ product }) => {
   const { colors } = product;

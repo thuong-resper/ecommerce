@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,13 +18,19 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartList from "../../components/Cart/CartList";
 import SimpleAlerts from "../../components/UI/Alerts/Alerts";
-import { addToCart } from "../../store/actions/cartActions";
+import AlertDialogSlide from "../../components/UI/Modal/CustomModal";
+import {
+  addToCart,
+  removeAllCart,
+  removeFromCart
+} from "../../store/actions/cartActions";
 import { useStyles } from "./styles";
 
 const CartPage = ({ match, location, history }) => {
@@ -36,7 +42,6 @@ const CartPage = ({ match, location, history }) => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  console.log(cartItems);
 
   useEffect(() => {
     if (productId) {
@@ -45,8 +50,17 @@ const CartPage = ({ match, location, history }) => {
   }, [dispatch, productId, qty]);
 
   const handleDelete = (id) => {
-    // showModal(id);
-    console.log(id);
+    dispatch(removeFromCart(id));
+    history.push("/cart");
+  };
+
+  const handleDeleteAll = () => {
+    dispatch(removeAllCart());
+    history.push("/cart");
+  };
+
+  const checkoutHandler = () => {
+    history.push("/login?redirect=shipping");
   };
 
   /**cart table */
@@ -57,6 +71,7 @@ const CartPage = ({ match, location, history }) => {
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [cartItem, setCartItem] = useState([]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -73,9 +88,10 @@ const CartPage = ({ match, location, history }) => {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, name, row) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
+    // let newCartItem = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
@@ -91,6 +107,13 @@ const CartPage = ({ match, location, history }) => {
     }
 
     setSelected(newSelected);
+    // for (let i = 0; i < newSelected.length; i++) {
+    //   newCartItem = newCartItem.concat(
+    //     cartItems.filter((item) => item.name === newSelected[i])
+    //   );
+    // }
+    // setCartItem(newCartItem);
+    // console.log(newCartItem);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -131,7 +154,10 @@ const CartPage = ({ match, location, history }) => {
 
           <div className={classes.root}>
             <Paper className={classes.paper}>
-              <EnhancedTableToolbar numSelected={selected.length} />
+              <EnhancedTableToolbar
+                handleDeleteAll={handleDeleteAll}
+                numSelected={selected.length}
+              />
               <TableContainer>
                 <Table
                   className={classes.table}
@@ -198,9 +224,97 @@ const CartPage = ({ match, location, history }) => {
           </div>
         )}
       </Grid>
+
+      {/*order detail*/}
+
       <Grid item xs={4} className={classes.orderDetail}>
-        <Typography>Location</Typography>
-        Order Detail
+        <Typography className={classes.locationLabel} gutterBottom>
+          Location
+        </Typography>
+        <div className={classes.location}>
+          <RoomOutlinedIcon className={classes.locationIcon} />
+          <Typography variant="body2">
+            Hồ Chí Minh, Quận Phú Nhuận, Phường 2
+          </Typography>
+        </div>
+        <div className={classes.summary_section}>
+          <div className={classes.summary_section_heading}>Order Summary</div>
+          <div className={classes.summary_section_content}>
+            <div className={classes.checkout_summary}>
+              <div className={classes.checkout_rows}>
+                <div className={classes.checkout_row}>
+                  <div className={classes.checkout_summary_label}>
+                    Subtotal (
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)} items)
+                  </div>
+                  <div className={classes.checkout_summary_value}>
+                    $
+                    {cartItems
+                      .reduce((acc, item) => acc + item.qty * item.price, 0)
+                      .toFixed(2)}
+                  </div>
+                </div>
+                <div className={classes.checkout_row}>
+                  <div className={classes.checkout_summary_label}>
+                    Shipping Fee
+                  </div>
+                  <div className={classes.checkout_summary_value}>
+                    $
+                    {cartItems.reduce(
+                      (acc, item) => acc + item.qty * item.price,
+                      0
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={classes.voucher_input}>
+              <div className={classes.voucher_input_inner}>
+                <div className={classes.voucher_input_col_9}>
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    size="small"
+                    className={classes.voucher_input_type}
+                  />
+                </div>
+                <div className={classes.voucher_input_col_3}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.voucher_input_button}
+                  >
+                    Apply
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={classes.checkout_order_total}>
+            <div className={classes.checkout_order_row}>
+              <div className={classes.checkout_order_total_title}>Total</div>
+              <div className={classes.checkout_order_total_fee}>
+                $
+                {cartItems.reduce(
+                  (acc, item) => acc + item.qty * item.price,
+                  0
+                )}
+                <small className={classes.checkout_order_total_fee_tip}>
+                  VAT included, where applicable
+                </small>
+              </div>
+            </div>
+          </div>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.confirm_cart_button}
+            disabled={cartItems.length === 0}
+            onClick={checkoutHandler}
+          >
+            CONFIRM CART
+          </Button>
+        </div>
       </Grid>
     </Grid>
   );
@@ -260,6 +374,10 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+  // const handleDelete = (id) => {
+  //   // showModal(id);
+  //   console.log(id);
+  // };
 
   return (
     <TableHead>
@@ -331,7 +449,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, handleDeleteAll } = props;
 
   return (
     <Toolbar
@@ -360,11 +478,20 @@ const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <AlertDialogSlide
+          title="Info"
+          iconAnchor={<DeleteIcon />}
+          component={
+            <Typography>Are you sure want to delete all items</Typography>
+          }
+          confirmButton={
+            <div>
+              <Button color="primary" onClick={handleDeleteAll}>
+                Agree
+              </Button>
+            </div>
+          }
+        />
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">

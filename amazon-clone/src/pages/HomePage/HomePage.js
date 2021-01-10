@@ -5,10 +5,10 @@ import SimpleBackdrop from "../../components/Backdrop/Backdrop";
 import Product from "../../components/Products/Product/Product";
 import SimpleAlerts from "../../components/UI/Alerts/Alerts";
 import { listProducts } from "../../store/actions/productActions";
-import { useStyles } from "./styles";
+// import { useStyles } from "./styles";
 
 const HomePage = (props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const dispatch = useDispatch();
   //select the part of state (products list)

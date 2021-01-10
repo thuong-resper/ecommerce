@@ -28,12 +28,10 @@ const ProductPage = ({ history, match }) => {
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
-  console.log(product);
   const max = product.countInStock;
   const [qty, setQty] = useState(1);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     const base = Math.abs(e.target.value);
 
     if (base >= max) {
@@ -195,7 +193,7 @@ const ProductPage = ({ history, match }) => {
                     variant="contained"
                     color="primary"
                     className={classes.orderButton}
-                    disabled={product.countInStock === 0}
+                    disabled={product.countInStock === 0 || qty === 0}
                   >
                     Add To Card
                   </Button>

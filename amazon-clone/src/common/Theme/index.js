@@ -9,6 +9,7 @@ const theme = createMuiTheme({
     defaultTextColor: "#000000",
     hover: "rgba(0,0,0,0.08)",
     link: "rgba(0, 0, 0, 0.87)",
+    whiteThin: "#00000033",
   },
   typography: {
     fontFamily: "Roboto",

@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import { routes } from "./routes";
 import { useStyles } from "./styles";
+import "./global.css";
 
 const App = () => {
   const classes = useStyles();

@@ -20,12 +20,15 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import React from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "../../hooks/useRouter";
 import { useStyles } from "./styles";
 
 const Header = () => {
   const classes = useStyles();
   const router = useRouter();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -44,7 +47,7 @@ const Header = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = "primary-search-account-menu";
+  // const menuId = "primary-search-account-menu";
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -143,10 +146,17 @@ const Header = () => {
                 </Badge>
               </IconButton>
               <IconButton
+                onClick={(e) => router.push("/cart")}
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={17} color="secondary">
+                <Badge
+                  badgeContent={cartItems.reduce(
+                    (acc, item) => acc + item.qty,
+                    0
+                  )}
+                  color="secondary"
+                >
                   <ShoppingBasketIcon />
                 </Badge>
               </IconButton>
