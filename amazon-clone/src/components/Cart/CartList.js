@@ -1,130 +1,145 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
-import Checkbox from "@material-ui/core/Checkbox";
+import { Button, Grid } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-// import { makeStyles } from "@material-ui/core/styles";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
+import AddIcon from "@material-ui/icons/Add";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import RemoveIcon from "@material-ui/icons/Remove";
+import clsx from "clsx";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/actions/cartActions";
+import { Link, useHistory } from "react-router-dom";
+import { addToCart, removeFromCart } from "../../store/actions/cartActions";
 import AlertDialogSlide from "../UI/Modal/CustomModal";
 import { useStyles } from "./styles";
-// import { styles } from "./styles.module.css";
+import styles from "./styles.module.css"; 
 
 const CartList = (props) => {
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const {
-    isItemSelected,
-    row,
-    handleClick,
-    labelId,
-    handleClickConfirm,
-  } = props;
+  const { item } = props;
+  const { countInStock } = item;
+
+  const handleChange = (e) => {
+    if (Math.abs(e.target.value) > countInStock) {
+      e.target.value = countInStock;
+      dispatch(addToCart(item.product, Number(e.target.value)));
+    }
+    dispatch(addToCart(item.product, Number(e.target.value)));
+  };
+
+  const increment = () => {
+    dispatch(addToCart(item.product, item.qty + 1));
+    history.push("/cart");
+  };
+  const decrement = (item) => {
+    dispatch(addToCart(item.product, item.qty - 1));
+    history.push("/cart");
+  };
+
+  const handleDelete = (id) => {
+    dispatch(removeFromCart(id));
+    history.push("/cart");
+  };
 
   return (
-    <TableRow
-      hover
-      role="checkbox"
-      aria-checked={isItemSelected}
-      tabIndex={-1}
-      key={row.name}
-      className={classes.oneCartItem}
-    >
-      <TableCell padding="checkbox">
-        <Checkbox
-          onClick={(event) => handleClick(event, row.name, row)}
-          checked={isItemSelected}
-          inputProps={{ "aria-labelledby": labelId }}
-        />
-      </TableCell>
-      <TableCell
-        component="th"
-        id={labelId}
-        scope="row"
-        className={classes.tableTh}
-      >
-        <img alt="d" className={classes.media} src={row.image} />
-      </TableCell>
-      <TableCell align="left">{row.name}</TableCell>
-      <TableCell align="left">
-        <div className={classes.price}>
-          <Typography variant="h6" color="secondary">
-            <abbr
-              style={{
-                textDecoration: "underline dotted",
-              }}
-            >
-              USD
-            </abbr>
-            {row.price}
-          </Typography>
-          <Typography variant="body2">
-            {row.sale ? (
-              <span>
-                <span className={classes.priceCompare}>
-                  ${row.priceCompare}
-                </span>
+    <div>
+      <Grid item xs={12} className={styles.ShopName}>
+        <Typography variant="body2" className={styles.verifyTag}>
+          Verify
+        </Typography>
+        <Typography>{item.name} </Typography>
+        <KeyboardArrowRightIcon color="disabled" />
+      </Grid>
+      <div className={styles.contentItem}>
+        <Grid item xs={2} className={styles.Img}>
+          <Link to="/">
+            <img alt="d" className={classes.media} src={item.image} />
+          </Link>
+        </Grid>
+        <Grid item xs={6} className={classes.ProductName}>
+          <Typography>{item.name}</Typography>
+        </Grid>
+        <Grid item xs={2} className={classes.ProductPrice}>
+          <div className={classes.price}>
+            <Typography variant="h6" color="secondary">
+              <abbr
+                style={{
+                  textDecoration: "underline dotted",
+                }}
+              >
+                USD
+              </abbr>
+              {item.price}
+            </Typography>
+            <Typography variant="body2">
+              {item.sale ? (
                 <span>
-                  {(
-                    -(1 - (row.priceCompare - row.price) / row.price) * 100
-                  ).toFixed() + "%"}
+                  <span className={classes.priceCompare}>
+                    ${item.priceCompare}
+                  </span>
+                  <span>
+                    {(
+                      -(1 - (item.priceCompare - item.price) / item.price) * 100
+                    ).toFixed() + "%"}
+                  </span>
                 </span>
-              </span>
-            ) : null}
-          </Typography>
-          <div className={classes.iconButton}>
-            <IconButton>
-              <FavoriteBorderIcon />
-            </IconButton>
-            <AlertDialogSlide
-              title="Info"
-              iconAnchor={<DeleteOutlineIcon />}
-              component={
-                <Typography>
-                  Are you sure want to delete {row.product}
-                </Typography>
-              }
-              confirmButton={
-                <div>
-                  <Button color="primary" onClick={handleClickConfirm}>
-                    Agree
-                  </Button>
-                </div>
-              }
+              ) : null}
+            </Typography>
+            <div className={classes.iconButton}>
+              <IconButton>
+                <FavoriteBorderIcon />
+              </IconButton>
+              <AlertDialogSlide
+                title="Info"
+                iconAnchor={<DeleteOutlineIcon />}
+                component={
+                  <Typography>
+                    Are you sure want to delete {item.product}
+                  </Typography>
+                }
+                confirmButton={
+                  <div>
+                    <Button
+                      color="primary"
+                      onClick={() => handleDelete(item.product)}
+                    >
+                      Agree
+                    </Button>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+        </Grid>
+        <Grid item xs={2} className={styles.Qty}>
+          <div className={styles.IconButton}>
+            <RemoveIcon
+              className={clsx(styles.IconButtonItem, {
+                [styles.IconDisabled]: item.qty <= 1,
+              })}
+              onClick={item.qty <= 1 ? null : () => decrement(item)}
             />
           </div>
-        </div>
-      </TableCell>
-      <TableCell align="left">
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Qty</InputLabel>
-          <Select
-            value={row.qty}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            onChange={(e) =>
-              dispatch(addToCart(row.product, Number(e.target.value)))
-            }
-          >
-            {[...Array(row.countInStock).keys()].map((x) => (
-              <MenuItem key={x + 1} value={x + 1}>
-                {x + 1}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </TableCell>
-    </TableRow>
+          <input
+            className={styles.Input}
+            type="number"
+            value={item.qty}
+            onChange={(e) => handleChange(e)}
+          />
+          <div className={styles.IconButton}>
+            <AddIcon
+              className={clsx(styles.IconButtonItem, {
+                [styles.IconDisabled]: item.qty >= countInStock,
+              })}
+              onClick={item.qty < countInStock ? () => increment(item) : null}
+            />
+          </div>
+        </Grid>
+      </div>
+    </div>
   );
 };
 

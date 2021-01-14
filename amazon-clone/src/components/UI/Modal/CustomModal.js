@@ -5,6 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 import { useStyles } from "./styles";
 
@@ -38,7 +39,14 @@ export default function AlertDialogSlide(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
+        <div className={classes.dialog}>
+          <DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
+          <CloseIcon
+            color="inherit"
+            onClick={handleClose}
+            className={classes.closeIcon}
+          />
+        </div>
         <DialogContent>{component}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -2,6 +2,7 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_REMOVE_ALL_ITEMS,
+  DECREASE_ONE_ITEM,
 } from "../../constants/cartConstants";
 import axios from "axios";
 
@@ -33,9 +34,28 @@ export const removeFromCart = (id) => (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
-export const removeAllCart = () => (dispatch, getState) => {
+export const removeAllCart = (filters) => (dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ALL_ITEMS,
+    payload: filters,
+  });
+
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const decreaseOneItem = (id) => (dispatch, getState) => {
+  dispatch({
+    type: DECREASE_ONE_ITEM,
+    payload: id,
+  });
+
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const increaseOneItem = (id) => (dispatch, getState) => {
+  dispatch({
+    type: DECREASE_ONE_ITEM,
+    payload: id,
   });
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));

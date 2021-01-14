@@ -2,6 +2,8 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ALL_ITEMS,
   CART_REMOVE_ITEM,
+  DECREASE_ONE_ITEM,
+  INCREASE_ONE_ITEM,
 } from "../../constants/cartConstants";
 
 export const cartReducer = (
@@ -32,10 +34,32 @@ export const cartReducer = (
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
     case CART_REMOVE_ALL_ITEMS:
+      const arr1 = state.cartItems;
+      const arr2 = action.payload;
+
+      // delete item with the same key in 2 arrays
       return {
         ...state,
-        cartItems: [],
+        cartItems: arr1.filter(function (o1) {
+          return !arr2.some(function (o2) {
+            //  for different we use NOT (!) before obj2 here
+            return o1.product === o2.product; // id is unique both array object
+          });
+        }),
       };
+    case DECREASE_ONE_ITEM:
+      const id = action.payload;
+      return {
+        ...state,
+        cartItems: state.cartItems.map((obj) =>
+          obj.product === id ? { ...obj, qty: obj.qty - 1 } : obj
+        ),
+      };
+    case INCREASE_ONE_ITEM:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

@@ -62,7 +62,12 @@ const ProductPage = ({ history, match }) => {
       ) : error ? (
         <SimpleAlerts severity="error" message={error} />
       ) : (
-        <Grid container spacing={3} direction="row">
+        <Grid
+          container
+          spacing={3}
+          direction="row"
+          className={classes.background}
+        >
           <Grid item xs={12}>
             <CustomizedBreadcrumbs />
           </Grid>

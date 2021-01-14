@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   orderDetail: {
     backgroundColor: "#fff !important",
     borderRadius: 4,
-    marginTop: theme.spacing(1.5),
+    marginTop: theme.spacing(3.5),
   },
   location: {
     display: "flex",

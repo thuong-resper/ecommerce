@@ -20,4 +20,27 @@ export const useStyles = makeStyles((theme) => ({
       borderBottom: "none",
     },
   },
+
+  //new
+
+  content: {
+    display: "flex",
+    justifyContent: "space-between",
+    // width: "80%",
+  },
+  Qty: {
+    display: "flex",
+    height: 40,
+    // alignItems: "center",
+  },
+  Input: {
+    width: 40,
+    maxHeight: 30,
+    // text
+  },
+  IconButton: {
+    lineHeight: 40,
+    maxHeight: 30,
+    height: "100%",
+  },
 }));
