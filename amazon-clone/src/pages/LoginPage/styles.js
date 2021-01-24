@@ -38,7 +38,7 @@ export const styles = (theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: theme.color.link,
+    // color: theme.color.link,
   },
   textLow: {
     textTransform: "none",

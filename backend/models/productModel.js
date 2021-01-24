@@ -12,7 +12,7 @@ const reviewSchema = mongoose.Schema(
 );
 
 const promotionsSchema = mongoose.Schema({
-  item: { type: String, required: true },
+  name: { type: String, required: true },
   detail: { type: String, required: true },
 });
 
@@ -20,6 +20,11 @@ const colorsSchema = mongoose.Schema({
   name: { type: String, required: true },
   value: { type: String, required: true },
 });
+
+// const sizeSchema = mongoose.Schema({
+//   name: { type: String, required: true },
+//   value: { type: String, required: true },
+// });
 
 const productSchema = mongoose.Schema(
   {
@@ -41,6 +46,7 @@ const productSchema = mongoose.Schema(
     countInStock: { type: Number, required: true, default: 0 },
     promotions: [promotionsSchema],
     colors: [colorsSchema],
+    // size: [sizeSchema],
   },
   { timestamp: true }
 );

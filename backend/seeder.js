@@ -16,19 +16,21 @@ const importData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
 
-    const createdUser = await User.insertMany(users);
+    const createdUsers = await User.insertMany(users);
 
-    const adminUser = createdUser[0]._id;
+    const adminUser = createdUsers[0]._id;
 
-    const sampleProduct = products.map((product) => {
+    const sampleProducts = products.map((product) => {
       return { ...product, user: adminUser };
     });
 
-    await Product.insertMany(sampleProduct);
+    await Product.insertMany(sampleProducts);
 
-    console.log(object);
+    console.log("Data Imported!");
+    process.exit();
   } catch (error) {
-    `${error}`;
+    console.error(`${error}`);
+    process.exit(1);
   }
 };
 
@@ -38,9 +40,11 @@ const destroyData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
 
-    console.log(object);
+    console.log("Data Destroyed!");
+    process.exit();
   } catch (error) {
-    `${error}`;
+    console.error(`${error}`);
+    process.exit(1);
   }
 };
 

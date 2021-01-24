@@ -20,9 +20,9 @@ export const routes = [
     exact: false,
   },
   {
-    path: "/auth",
-    name: "AuthPage",
-    component: React.lazy(() => import("./pages/AuthPage/AuthPage")),
+    path: "/login",
+    name: "LoginPage",
+    component: React.lazy(() => import("./pages/LoginPage/LoginPage")),
     exact: false,
   },
 ];

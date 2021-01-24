@@ -161,7 +161,7 @@ const Header = () => {
                 </Badge>
               </IconButton>
               <Button
-                onClick={(e) => router.push("/auth")}
+                onClick={(e) => router.push("/login")}
                 size="medium"
                 color="inherit"
               >

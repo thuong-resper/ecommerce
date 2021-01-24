@@ -6,6 +6,7 @@ import { useStyles } from "./styles";
 const ProductPromotion = ({ product }) => {
   const classes = useStyles();
   const { promotions } = product;
+  console.log(promotions);
   return (
     <Grid item xs={12} className={classes.table}>
       <Grid item xs={3}>
@@ -13,17 +14,17 @@ const ProductPromotion = ({ product }) => {
       </Grid>
       <Grid item xs={9} className={classes.promotionTagItem}>
         <div>
-          {promotions.map((variant) => (
+          {promotions.map((item) => (
             <DropdownButton
               as={ButtonGroup}
-              key={variant.name}
-              id={`dropdown-variants-${variant}`}
-              variant={variant.name.toLowerCase()}
-              title={variant.name}
+              key={item.name}
+              id={`dropdown-variants-${item}`}
+              variant={item.name.toLowerCase()}
+              title={item.name}
               className={classes.buttonGroup}
             >
               <Dropdown.Item
-                eventKey={variant._id}
+                eventKey={item._id}
                 as={"div"}
                 className={classes.detail}
               >
@@ -32,9 +33,9 @@ const ProductPromotion = ({ product }) => {
                   className={classes.item}
                   color="secondary"
                 >
-                  {variant.name}
+                  {item.name}
                 </Typography>
-                <Typography variant="body2">{variant.detail}</Typography>
+                <Typography variant="body2">{item.detail}</Typography>
               </Dropdown.Item>
             </DropdownButton>
           ))}
