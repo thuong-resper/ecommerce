@@ -24,7 +24,7 @@ const App = () => {
         <Header />
         <div className={classes.root}>
           <CssBaseline />
-          <Container component="main" className={classes.main} maxWidth="lg">
+          <Container component="main" className="main-view">
             <Switch>
               {routes.map((route) => (
                 <Route

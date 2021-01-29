@@ -3,6 +3,7 @@ export const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
     backgroundColor: theme.palette.primary.main,
+    zIndex: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),

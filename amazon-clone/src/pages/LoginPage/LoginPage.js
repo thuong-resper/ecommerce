@@ -20,13 +20,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { styles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/actions/userActions";
-import SimpleAlerts from "../../components/UI/Alerts/Alerts";
-import { Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import SimpleBackdrop from "../../components/Backdrop/Backdrop";
+import SimpleAlerts from "../../components/UI/Alerts/Alerts";
+import { login } from "../../store/actions/userActions";
+import { styles } from "./styles";
+import "./styles.css";
 
 const LoginPage = (props) => {
   const { location, classes, history } = props;
@@ -41,7 +41,7 @@ const LoginPage = (props) => {
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo !== null) {
       history.push(redirect);
     }
   }, [history, userInfo, redirect]);
@@ -52,7 +52,7 @@ const LoginPage = (props) => {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container className="root">
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid
         item

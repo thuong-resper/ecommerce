@@ -1,0 +1,55 @@
+.cukhLH {
+  margin: 0 !important;
+}
+.carousel-product {
+  position: relative;
+}
+.carousel-product > div {
+  height: 400px !important;
+}
+
+.carousel-banner {
+  position: relative;
+  height: 400px;
+  /* height: 100% !important; */
+}
+
+@media only screen and (max-width: 600px) {
+  .carousel-banner {
+    height: 110px;
+  }
+  .carousel-banner .rec-pagination {
+    bottom: 5px !important;
+  }
+  .carousel-banner .rec-pagination .rec-dot {
+    height: 3px;
+    width: 3px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel-banner {
+    height: 200px;
+  }
+  .carousel-banner .rec-pagination {
+    bottom: 5px !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .carousel-banner {
+    height: 300px;
+  }
+  .carousel-banner .rec-pagination {
+    bottom: 20px !important;
+  }
+}
+
+.carousel-banner .rec-carousel {
+  height: 100% !important;
+}
+
+.carousel-banner .rec-pagination {
+  position: absolute;
+  bottom: 20px;
+}

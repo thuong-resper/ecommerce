@@ -1,7 +1,4 @@
 export const styles = (theme) => ({
-  root: {
-    height: "100vh",
-  },
   image: {
     backgroundImage:
       "url(https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1266&q=80)",
