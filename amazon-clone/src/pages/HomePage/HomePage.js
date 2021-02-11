@@ -1,3 +1,4 @@
+import { Grid } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
@@ -5,8 +6,8 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import Carousel from "react-elastic-carousel";
+import React, { useEffect, useState } from "react";
+import Carousel from "react-material-ui-carousel";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleBackdrop from "../../components/Backdrop/Backdrop";
 import Product from "../../components/Products/Product/Product";
@@ -17,7 +18,7 @@ import "./styles.css";
 
 const HomePage = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -27,13 +28,6 @@ const HomePage = (props) => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  const breakPoints = [
-    { width: 500, itemsToShow: 2, itemsToScroll: 1 },
-    { width: 768, itemsToShow: 3, itemsToScroll: 1 },
-    { width: 960, itemsToShow: 4, itemsToScroll: 1 },
-    { width: 1200, itemsToShow: 5, itemsToScroll: 1 },
-  ];
-
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
@@ -41,15 +35,10 @@ const HomePage = (props) => {
   return (
     <div>
       <Carousel
-        itemsToShow={1}
-        // pagination={null}
-        // enableMouseSwipe={true}
-        // enableAutoPlay={true}
-        // autoPlaySpeed={3000}
-        // enableSwipe={false}
-        itemPadding={[0, 0]}
-        focusOnSelect={true}
-        className="carousel-banner"
+        autoPlay={false}
+        animation="fade"
+        navButtonsAlwaysVisible={true}
+        navButtonsAlwaysInvisible={false}
       >
         <ProductBanner />
         <ProductBanner />
@@ -74,21 +63,21 @@ const HomePage = (props) => {
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0} className="tab-panel">
-            <Carousel
-              breakPoints={breakPoints}
-              pagination={null}
-              itemsToShow={2}
-              // enableMouseSwipe={true}
-              // enableAutoPlay={true}
-              // autoPlaySpeed={3000}
-              // enableSwipe={false}
-              focusOnSelect={true}
-              className="carousel-product"
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="stretch"
+              style={{ width: "100%" }}
             >
               {products.map((product) => (
-                <Product product={product} key={product._id} />
+                <Product
+                  product={product}
+                  key={product._id}
+                  loading={loading}
+                />
               ))}
-            </Carousel>
+            </Grid>
           </TabPanel>
           <TabPanel value={value} index={1}>
             Item Two

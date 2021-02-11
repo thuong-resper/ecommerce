@@ -1,5 +1,4 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-// import { watchAuth, watchBurgerBuilder, watchOrder } from "./store/sagas/index";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
@@ -8,7 +7,7 @@ import {
   productDetailsReducer,
   productListReducer,
 } from "./reducers/productReducers";
-import { userLoginReducer } from "./reducers/userReducers";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 // const composeEnhancers =
 //   process.env.NODE_ENV === "development"
@@ -22,6 +21,7 @@ const rootReducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -36,9 +36,7 @@ const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
   },
-  userLogin: {
-    userInfo: userInfoFromStorage,
-  },
+  userLogin: { userInfo: userInfoFromStorage },
 };
 
 const sagaMiddleware = createSagaMiddleware();
@@ -52,7 +50,7 @@ const store = createStore(
 );
 
 //run saga
-// sagaMiddleware.run(watchAuth, watchBurgerBuilder);
+// sagaMiddleware.run(watchAuth);
 // sagaMiddleware.run(watchBurgerBuilder);
 // sagaMiddleware.run(watchOrder);
 

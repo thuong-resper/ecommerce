@@ -6,9 +6,9 @@ import { useStyles } from "./styles";
 import styles from "./styles.module.css";
 
 const SelectQty = (props) => {
+  const classes = useStyles();
   const { countInStock } = props.product;
 
-  const classes = useStyles();
   const max = countInStock;
 
   const [count, setCount] = useState(1);

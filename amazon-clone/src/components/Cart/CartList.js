@@ -13,7 +13,7 @@ import { Link, useHistory } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../store/actions/cartActions";
 import AlertDialogSlide from "../UI/Modal/CustomModal";
 import { useStyles } from "./styles";
-import styles from "./styles.module.css"; 
+import styles from "./styles.module.css";
 
 const CartList = (props) => {
   const history = useHistory();
@@ -97,7 +97,7 @@ const CartList = (props) => {
                 iconAnchor={<DeleteOutlineIcon />}
                 component={
                   <Typography>
-                    Are you sure want to delete {item.product}
+                    Are you sure want to delete {item.name}
                   </Typography>
                 }
                 confirmButton={

@@ -2,8 +2,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    backgroundColor: theme.palette.primary.main,
-    zIndex: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -15,22 +13,12 @@ export const useStyles = makeStyles((theme) => ({
     },
     cursor: "pointer",
   },
-  appBar: {
-    boxShadow: "none",
-  },
-  link: {
-    textDecoration: "none",
-    color: "inherit",
-  },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    searchInput: {
-      width: "50rem",
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -77,5 +65,15 @@ export const useStyles = makeStyles((theme) => ({
   iconSpacing: {
     marginRight: theme.spacing(0.5),
     marginLeft: theme.spacing(0.5),
+  },
+  spacing: {
+    padding: "5px 10px 0 10px",
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none",
   },
 }));

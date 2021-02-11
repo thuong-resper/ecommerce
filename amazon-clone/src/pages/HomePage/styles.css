@@ -1,6 +1,15 @@
 .cukhLH {
   margin: 0 !important;
 }
+
+.carousel-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .carousel-product {
   position: relative;
 }
@@ -39,6 +48,15 @@
 @media only screen and (min-width: 1024px) {
   .carousel-banner {
     height: 300px;
+  }
+  .carousel-banner .rec-pagination {
+    bottom: 20px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .carousel-banner {
+    height: 370px;
   }
   .carousel-banner .rec-pagination {
     bottom: 20px !important;

@@ -26,6 +26,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   brandLink: {
     margin: "0 5px",
+    textDecoration: "none",
+    fontSize: "12px",
   },
   brandDivider: {
     height: 15,
@@ -38,11 +40,6 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     fontSize: 14,
     marginRight: theme.spacing(0.5),
-  },
-  priceDetail: {
-    padding: "20px 0",
-    margin: "13px 0",
-    borderTop: "1px solid #9e9e9e14",
   },
   button: {
     display: "flex",

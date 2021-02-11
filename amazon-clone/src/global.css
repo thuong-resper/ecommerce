@@ -11,6 +11,10 @@
   --background: #f2f3f5;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* main view */
 .main-view {
   margin: 24px auto 12px;
@@ -21,4 +25,12 @@
     margin: 0;
     padding: 0 !important;
   }
+}
+
+.three-dots {
+  overflow: hidden;
+  width: 100px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }

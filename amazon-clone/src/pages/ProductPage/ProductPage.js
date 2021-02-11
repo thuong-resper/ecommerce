@@ -1,4 +1,4 @@
-import { Grid, TextField } from "@material-ui/core";
+import { Box, Grid, TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -71,7 +71,6 @@ const ProductPage = ({ history, match }) => {
           <Grid item xs={12}>
             <CustomizedBreadcrumbs />
           </Grid>
-
           <Grid item xs={4}>
             <img alt="d" className={classes.media} src={product.image} />
           </Grid>
@@ -108,39 +107,49 @@ const ProductPage = ({ history, match }) => {
                   to={`/collections/vendors?q=${product.brand}`}
                   className={classes.brandLink}
                 >
-                  {product.brand}
+                  No brand
                 </Link>
                 <div className={classes.brandDivider}></div>
                 <Link
                   to={`/collections/vendors?q=${product.brand}`}
                   className={classes.brandLink}
                 >
-                  More options {product.brand}
+                  <div style={{ width: 200, whiteSpace: "nowrap" }}>
+                    <Box
+                      component="div"
+                      my={2}
+                      textOverflow="ellipsis"
+                      overflow="hidden"
+                      bgcolor="background.paper"
+                    >
+                      More options {product.brand}
+                    </Box>
+                  </div>
                 </Link>
               </Grid>
               <Grid item xs={12} className={classes.priceDetail}>
                 <Typography variant="h4" color="secondary">
-                  <abbr style={{ textDecoration: "underline dotted" }}>
-                    USD
-                  </abbr>
                   {product.price}
+                  <abbr
+                    style={{ textDecoration: "underline", margin: "0 5px" }}
+                  >
+                    đ
+                  </abbr>
                 </Typography>
                 <Typography variant="body2">
-                  {product.sale ? (
-                    <span>
-                      <span className={classes.priceCompare}>
-                        ${product.priceCompare}
-                      </span>
-                      <span>
-                        {(
-                          -(
-                            (product.priceCompare - product.price) /
-                            product.price
-                          ) * 100
-                        ).toFixed() + "%"}
-                      </span>
+                  <span>
+                    <span className={classes.priceCompare}>
+                      ${product.priceCompare}
                     </span>
-                  ) : null}
+                    <span>
+                      {(
+                        -(
+                          (product.priceCompare - product.price) /
+                          product.price
+                        ) * 100
+                      ).toFixed() + "%"}
+                    </span>
+                  </span>
                 </Typography>
               </Grid>
               <Grid item xs={12}>

@@ -38,7 +38,7 @@ export const styles = (theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: theme.color.link,
+    // color: theme.color.link,
   },
   textLow: {
     textTransform: "none",
@@ -73,7 +73,6 @@ export const styles = (theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    // width: "10.5rem",
   },
   signUp: {
     fontWeight: "500",
